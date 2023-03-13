@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // 프로그램 실행을 위해 main이 필요함.
-void main(){
+void main() {
   // 플러터는 프레임워크 -> 제어의 역전 (IOC)
   // 앱을 실행시켜줘 (개발자가 프레임워크에 요청)
   // 매개변수는 Widget
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
               label: "add",
-                icon: Icon(Icons.add),
+              icon: Icon(Icons.add),
             ),
             BottomNavigationBarItem(
               label: "remove",
@@ -82,37 +82,62 @@ class MyApp2 extends StatefulWidget {
 class _MyApp2State extends State<MyApp2> {
   // State안의 변수는 관찰된다.
   // 변수의 값이 바뀌면 화면이 바뀐다.
-  int count = 0;
+  // int count = 0;
 
-  void increaseCount() {
-    // Stateful 변수를 변경할 때에는
-    // 무조건 setState 함수를 사용한다.
+  int navIndex = 0;
+
+  void changeNavIndex(int index){
     setState(() {
-      count++;
-     });
+      navIndex = index;
+    });
   }
+
+  List _items = [
+    Container(
+      color: Colors.yellow,
+    ),
+    Container(
+      color: Colors.green,
+    ),
+    Container(
+      color: Colors.blue,
+    ),
+  ];
+
+  // void increaseCount() {
+  //   // Stateful 변수를 변경할 때에는
+  //   // 무조건 setState 함수를 사용한다.
+  //   setState(() {
+  //     count++;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            increaseCount();
-          },
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: navIndex,
+          // onTap: changeNavIndex,
+          onTap: (index) => changeNavIndex(index),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.airplane_ticket),
+              label: "노랑",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_tree),
+              label: "초록",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.local_shipping),
+              label: "파랑",
+            ),
+          ],
         ),
-        body: SafeArea(
-            child: Center(
-              child: Text("현재 카운트 : $count"),
-            )
-        ),
+        body: SafeArea(child: _items[navIndex]),
       ),
     );
   }
 }
-
-
-
-
-
 
