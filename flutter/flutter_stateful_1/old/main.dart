@@ -1,13 +1,10 @@
-import 'dart:js';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_stateful_1/counter_controller.dart';
-import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+// void main() {
+//   runApp(const MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -32,39 +29,51 @@ class Parent extends StatefulWidget {
 }
 
 class _ParentState extends State<Parent> {
+  // 2번 자식한테 줄 변수
+  int count = 0;
+
+  // 1번 자식한테 줄 함수
+  void setCount(int newCount) {
+    setState(() {
+      count = newCount;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final counterController = context.read<CounterController>();
-    return ElevatedButton(onPressed: () {
-      counterController.changeTo(Random().nextInt(100));
-    },
-
+    return Row(
+      children: [
+        Child1(callback: setCount),
+        Child2(count: count),
+      ],
     );
   }
 }
 
 class Child1 extends StatelessWidget {
+  final Function callback;
 
-  const Child1({Key? key}) : super(key: key);
+  const Child1({Key? key, required this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: (){
+        callback(Random().nextInt(100));
       },
-      child: Text("난수 생성"),
+      child: const Text("난수 생성"),
     );
   }
 }
 
 class Child2 extends StatelessWidget {
 
-  const Child2({Key? key}) : super(key: key);
+  final int count;
+
+  const Child2({Key? key, required this.count}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final counterController = context.watch();
-    return Text("${counterController.count}");
+    return Text(count.toString());
   }
 }
