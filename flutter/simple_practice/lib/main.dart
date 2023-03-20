@@ -70,12 +70,12 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                   height: 360,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(2, (index) {
-                    return Container(
-                      width: 1, // 라인의 두께를 1로 설정
-                      color: Colors.grey, // 라인의 색상을 검정색으로 설정
-                    );
-                  }),
+                    children: List.generate(5, (index) {
+                      return Container(
+                        padding: EdgeInsets.all(23.0),
+                        child: Image.asset('images/menu_image${index+1}.png', fit: BoxFit.cover,),
+                      );
+                    }),
                   ),
                   decoration: BoxDecoration(
                       color: Colors.white,
