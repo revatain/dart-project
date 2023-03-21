@@ -28,10 +28,10 @@ class SecondPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // if(!Navigator.canPop(context)) {
-                //   showToast(context, "현재 페이지가 마지막 남은 페이지 입니다.");
-                //   return;
-                // }
+                if(!Navigator.canPop(context)) {
+                  showToast(context, "현재 페이지가 마지막 남은 페이지 입니다.");
+                  return;
+                }
                 Navigator.pop(context);
               },
               child: const Text('첫번째 화면 돌아가기\n(현재페이지 없애기)'),

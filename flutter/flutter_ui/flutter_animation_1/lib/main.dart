@@ -27,10 +27,7 @@ class AnimatedScreen1 extends StatefulWidget {
   @override
   State<AnimatedScreen1> createState() => _AnimatedScreen1State();
 }
-// (Single)TickerProviderStateMixin
-// 위젯에 애니메이션이 하나일 경우는 Single이 들어가고 2개인 경우는 빠진다.
-// 플러터는 60FPS 목표로 만들어진 프레임워크이므로 프레임마다 화면을
-// 갱신하도록 만들 수 있다.
+
 class _AnimatedScreen1State extends State<AnimatedScreen1>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
